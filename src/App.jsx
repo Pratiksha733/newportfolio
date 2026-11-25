@@ -15,7 +15,9 @@ import {
   Database,
   UserCheck,
   Globe,
-  Sparkles
+  Sparkles,
+  Monitor,
+  Target
 } from 'lucide-react';
 import './App.css';
 
@@ -32,28 +34,34 @@ function App() {
 
   const technicalSkills = [
     {
-      category: "Frontend Development",
-      icon: <Layers className="skill-icon" size={24} />,
-      skills: ["HTML5", "CSS3", "JavaScript (ES6+)", "React.js"]
+      category: "Programming Languages",
+      icon: <Code2 className="skill-icon" size={24} />,
+      skills: ["JavaScript", "C", "HTML", "CSS"]
     },
     {
-      category: "Backend & Databases",
-      icon: <Database className="skill-icon" size={24} />,
-      skills: ["MongoDB", "SQL", "Node.js", "Express.js"]
+      category: "Web Development",
+      icon: <Globe className="skill-icon" size={24} />,
+      skills: ["Responsive Web Design", "DOM Manipulation", "Semantic HTML", "CSS Flexbox & Grid"]
     },
     {
-      category: "Tools & Core Concepts",
+      category: "Tools & Platforms",
       icon: <Terminal className="skill-icon" size={24} />,
-      skills: ["GitHub", "VS Code", "Data Structures & Algorithms", "Problem Solving"]
+      skills: ["Git & GitHub", "VS Code", "LeetCode", "Chrome DevTools"]
+    },
+    {
+      category: "Core Fundamentals",
+      icon: <Sparkles className="skill-icon" size={24} />,
+      skills: ["Data Structures & Algorithms", "Problem Solving", "Artificial Intelligence Concepts"]
     }
   ];
 
   const softSkills = [
-    "Quick Learner",
-    "Adaptable",
-    "Team Worker",
-    "Technical Communication",
-    "Problem Solving"
+    { name: "Quick Learner", emoji: "⚡" },
+    { name: "Adaptability", emoji: "🔄" },
+    { name: "Teamwork", emoji: "🤝" },
+    { name: "Communication", emoji: "💬" },
+    { name: "Time Management", emoji: "⏰" },
+    { name: "Leadership", emoji: "🌟" }
   ];
 
   const projectsData = [
@@ -72,15 +80,24 @@ function App() {
       badge: "Deployed on GitHub Pages",
       live: "https://pratiksha733.github.io/Blinkit/",
       tech: ["HTML5", "CSS3", "JavaScript", "Responsive UI/UX"]
+    },
+    {
+      title: "BizMitra Business Platform",
+      image: "/bizmitra.jpg",
+      description: "Full-stack business platform with secure customer authentication, product discovery, shopping cart, checkout, order management, and business dashboard features.",
+      badge: "Production Deployed",
+      live: "https://bizmitra-1-ayqc.onrender.com",
+      tech: ["React.js", "Node.js", "Express.js", "MongoDB", "REST API"]
     }
   ];
 
   const educationData = [
     {
-      institution: "SR Group of Institutions (AKTU)",
-      location: "Lucknow, India",
       degree: "Bachelor of Technology in Computer Science and Engineering (Spec. in Artificial Intelligence)",
-      period: "2023 – 2027",
+      university: "A.P.J. Abdul Kalam Technical University",
+      college: "SR Group Of Institutions, BKT, Lucknow",
+      period: "2023–2027",
+      semester: "7th Semester",
       cgpa: "7.92"
     }
   ];
@@ -103,7 +120,7 @@ function App() {
         <div className="logo">&lt;{contactInfo.name} /&gt;</div>
         <nav>
           <ul className="nav-links">
-            <li><a href="#about">About</a></li>
+            <li><a href="#about-details">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#education">Education</a></li>
@@ -113,7 +130,7 @@ function App() {
       </header>
 
       {/* Hero Section */}
-      <section id="about" className="hero-section">
+      <section id="home" className="hero-section">
         {/* Profile photo in middle top with flank social links on Left and Right */}
         <div className="hero-avatar-wrapper">
           {/* Left Social Links */}
@@ -181,6 +198,51 @@ function App() {
         </div>
       </section>
 
+      {/* Separate About Section */}
+      <section id="about-details" className="about-section">
+        <div className="about-heading">
+          <h2>About Me</h2>
+          <p>Get to know more about my background and interests</p>
+        </div>
+
+        <div className="about-grid">
+          <article className="about-journey">
+            <h3>My Journey</h3>
+            <p>
+              Currently, I am a final year B.Tech student pursuing graduation in the domain
+              of Computer Science aligned with Artificial Intelligence. I enjoy turning
+              design ideas into functional, responsive web pages.
+            </p>
+          </article>
+
+          <div className="about-info-list">
+            <article className="about-info-card">
+              <div className="about-info-icon"><GraduationCap size={22} /></div>
+              <div>
+                <h3>Education</h3>
+                <p>B.Tech in Computer Science &amp; Artificial Intelligence (Final Year)</p>
+              </div>
+            </article>
+
+            <article className="about-info-card">
+              <div className="about-info-icon"><Monitor size={22} /></div>
+              <div>
+                <h3>Current Focus</h3>
+                <p>Frontend Web Development &amp; Problem Solving</p>
+              </div>
+            </article>
+
+            <article className="about-info-card">
+              <div className="about-info-icon"><Target size={22} /></div>
+              <div>
+                <h3>Goal</h3>
+                <p>Seeking an Internship / Junior Developer Role</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       {/* Skills Section */}
       <section id="skills" className="section">
         <div className="section-tag">Capabilities</div>
@@ -209,7 +271,10 @@ function App() {
           <h3 className="sub-title"><UserCheck size={20} /> Soft Skills</h3>
           <div className="skill-tags">
             {softSkills.map((skill, idx) => (
-              <span className="tag tag-soft" key={idx}>✓ {skill}</span>
+              <span className="tag tag-soft" key={idx}>
+                <span className="soft-skill-emoji">{skill.emoji}</span>
+                {skill.name}
+              </span>
             ))}
           </div>
         </div>
@@ -226,7 +291,14 @@ function App() {
             <div className="project-card-container glass-card" key={idx}>
               {/* Project Image Preview Header */}
               <div className="project-image-wrapper">
-                <img src={project.image} alt={project.title} className="project-preview-img" />
+                {project.image ? (
+                  <img src={project.image} alt={project.title} className="project-preview-img" />
+                ) : (
+                  <div className="project-placeholder" aria-label={project.title}>
+                    <Layers size={38} />
+                    <span>{project.title}</span>
+                  </div>
+                )}
               </div>
 
               {/* Project Details */}
@@ -268,8 +340,13 @@ function App() {
           {educationData.map((edu, idx) => (
             <div className="glass-card timeline-item" key={idx}>
               <div className="timeline-degree">{edu.degree}</div>
-              <div className="timeline-school">{edu.institution} — {edu.location}</div>
-              <div className="timeline-date">Duration: {edu.period} | CGPA: {edu.cgpa}</div>
+              <ul className="education-points">
+                <li><span className="education-emoji">🎓</span><strong>University:</strong> {edu.university}</li>
+                <li><span className="education-emoji">🏫</span><strong>College:</strong> {edu.college}</li>
+                <li><span className="education-emoji">📅</span><strong>Graduation Duration:</strong> {edu.period}</li>
+                <li><span className="education-emoji">📚</span><strong>Current Semester:</strong> {edu.semester}</li>
+                <li><span className="education-emoji">⭐</span><strong>CGPA:</strong> {edu.cgpa}</li>
+              </ul>
             </div>
           ))}
         </div>
